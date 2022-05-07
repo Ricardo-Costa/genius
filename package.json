@@ -1,11 +1,11 @@
 {
-  "name": "any-game",
+  "name": "genius",
   "version": "1.0.0",
   "description": "",
   "type": "module",
   "main": "src/index.js",
   "scripts": {
-    "start": "npx lite-server --port=3000"
+    "start:dev": "npx lite-server --port=3000"
   },
   "keywords": [],
   "author": "",
