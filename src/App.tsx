@@ -1,5 +1,5 @@
 import React, { MouseEvent, ReactElement, useEffect, useState } from 'react';
-import { DEFAULT_BLOCKS_BY_LEVEL, DEFAULT_DECREASER_INTERVAL_PERCENT, DEFAULT_INTERVAL } from './app/configs';
+import { DEFAULT_BLOCKS_BY_LEVEL, DEFAULT_DECREASER_INTERVAL_PERCENT, DEFAULT_INTERVAL, DEFAULT_START_SCORE } from './app/configs';
 import { activeBlock, deactiveBlock } from './app/utils/blocks.utils';
 import './assets/styles.scss';
 
@@ -18,6 +18,7 @@ const App = () => {
   });
   const [ blocks ] = useState<number>(gameStatus.level * DEFAULT_BLOCKS_BY_LEVEL);
   const [ timer, setTimer ] = useState<number>(DEFAULT_INTERVAL);
+  const [ scores, setScores ] = useState<number>(DEFAULT_START_SCORE);
 
   // HANDLE CLICK
   const clickBlock = (event: MouseEvent, blockId: number) => {  
@@ -105,7 +106,10 @@ const App = () => {
   return (
     <div id="main">
     <div id="header">{renderBlocks()}</div>
-    <div id="footer"></div>
+    <div id="footer">
+      <div>Nickname: Player 1</div>
+      <div>Scores: <span className='score-value'>{scores}</span></div>
+    </div>
     </div>
   );
 }

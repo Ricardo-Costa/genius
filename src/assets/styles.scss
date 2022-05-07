@@ -9,18 +9,50 @@ div#main {
 }
 div#header {
   display: flex;
-  height: 80vh;
   justify-content: space-around;
+  height: 80vh;
+  width: 100vw;
   background-color: rgba(165, 42, 42, 0.425);
+  flex-wrap: wrap;
 }
 div.block {
+  box-sizing: border-box;
   cursor: pointer;
   display: flex;
-  flex-grow: 1;
+  width: 50vw;
+  // flex-grow: 1;
   border: 2px solid yellowgreen;
   background-color: rgba(255, 255, 0, 0.39);
+  box-shadow: inset 0px 2000px 0px rgba(0, 0, 0, 0.24);
+
+  &:nth-child(1) {
+    background-color: rgb(70, 175, 70) !important;
+  }
+  &:nth-child(2) {
+    background-color: rgb(156, 135, 38) !important;
+  }
+  &:nth-child(3) {
+    background-color: rgb(175, 70, 70) !important;
+  }
+  &:nth-child(4) {
+    background-color: rgb(60, 62, 175) !important;
+  }
 }
 div.block:hover,
 div.block:active {
-  background-color: rgba(155, 155, 37, 0.39) !important;
+  box-shadow: none !important;
+}
+
+div#footer {
+  box-sizing: border-box;
+  padding: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 2.5em;
+  font-weight: bold;
+  height: 20vh;
+  width: 100vw;
+
+  span.score-value {
+    color: rgb(90, 245, 90);
+  }
 }
