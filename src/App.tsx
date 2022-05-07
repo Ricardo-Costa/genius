@@ -1,5 +1,6 @@
 import React, { MouseEvent, ReactElement, useEffect, useState } from 'react';
 import { DEFAULT_BG_ACTIVE_COLOR, DEFAULT_BG_DEACTIVE_COLOR, DEFAULT_BLOCKS_BY_LEVEL, DEFAULT_INTERVAL } from './app/configs';
+import { activeBlock, deactiveBlock } from './app/utils/blocks.utils';
 import './assets/styles.scss';
 
 export type GameStatus = {
@@ -8,7 +9,7 @@ export type GameStatus = {
   level: number
 };
 
-function App() {
+const App = () => {
 
   // STATES
   const [ gameStatus, setGameStatus ] = useState<GameStatus>({
@@ -60,24 +61,10 @@ function App() {
 
   useEffect(() => {
       // your post layout code (or 'effect') here.
-      function setBlockBackGroundColor(blockId: number, color: string) {
-        const el = document.getElementById(`block-ref-${blockId}`);
-        if (el) el.style.backgroundColor = color;
-      }
-          
-      function activeBlock(blockId: number | undefined) {
-        setBlockBackGroundColor(blockId || 0, DEFAULT_BG_ACTIVE_COLOR);
-      }
-          
-      function deactiveBlock(blockId: number | undefined) {
-        setBlockBackGroundColor(blockId || 0, DEFAULT_BG_DEACTIVE_COLOR);
-      }
-      
       let oldItem: number | undefined = undefined;
       const sequence = [ ...gameStatus.theSequence ];
       
       agente = setInterval(() => {
-      
         if (sequence.length) {
           if (oldItem === undefined) {
             oldItem = sequence.shift();
