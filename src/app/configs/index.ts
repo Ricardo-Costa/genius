@@ -1,4 +1,5 @@
 export const DEFAULT_START_SCORE = 0;
+export const DEFAULT_INCREASE_SCORE = 100;
 export const DEFAULT_BLOCKS_BY_LEVEL = 4;
 
 export const DEFAULT_INTERVAL = 1000;

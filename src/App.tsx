@@ -1,7 +1,8 @@
 import React, { MouseEvent, ReactElement, useEffect, useState } from 'react';
-import { DEFAULT_BLOCKS_BY_LEVEL, DEFAULT_DECREASER_INTERVAL_PERCENT, DEFAULT_INTERVAL, DEFAULT_START_SCORE } from './app/configs';
+import { DEFAULT_BLOCKS_BY_LEVEL, DEFAULT_DECREASER_INTERVAL_PERCENT, DEFAULT_INCREASE_SCORE, DEFAULT_INTERVAL, DEFAULT_START_SCORE } from './app/configs';
 import { activeBlock, deactiveBlock } from './app/utils/blocks.utils';
 import './assets/styles.scss';
+import 'animate.css';
 
 export type GameStatus = {
   theSequence: number[]
@@ -21,13 +22,14 @@ const App = () => {
   const [ scores, setScores ] = useState<number>(DEFAULT_START_SCORE);
 
   // HANDLE CLICK
-  const clickBlock = (event: MouseEvent, blockId: number) => {  
+  const clickBlock = (event: MouseEvent, blockId: number) => {
     gameStatus.sequence.push(Number(blockId));
   
     if (
       gameStatus.theSequence.length === gameStatus.sequence.length &&
       gameStatus.theSequence.every((value, index) => value === gameStatus.sequence[index])
     ) {
+      setScores( scores + DEFAULT_INCREASE_SCORE + ( DEFAULT_INTERVAL - parseInt(String(timer))));
       alert("Parabéns!!");
       // document.location.reload();
 
@@ -107,8 +109,10 @@ const App = () => {
     <div id="main">
     <div id="header">{renderBlocks()}</div>
     <div id="footer">
-      <div>Nickname: Player 1</div>
-      <div>Scores: <span className='score-value'>{scores}</span></div>
+      <div className='animate__animated animate__headShake'>Nickname: Player 1</div>
+      <div className='animate__animated animate__pulse animate__infinite	infinite'>
+        Scores: <span className='score-value'>{scores}</span>
+      </div>
     </div>
     </div>
   );
