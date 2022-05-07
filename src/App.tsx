@@ -12,7 +12,7 @@ function App() {
 
   // STATES
   const [ gameStatus, setGameStatus ] = useState<GameStatus>({
-    theSequence: [ 3, 6, 1, 10 ],
+    theSequence: [ 3, 0, 1, 2 ],
     sequence: [],
     level: 1,
   });
@@ -22,7 +22,7 @@ function App() {
   const clickBlock = (event: MouseEvent, blockId: number) => {
     console.log(event, blockId);
   
-    gameStatus.sequence.unshift(Number(blockId));
+    gameStatus.sequence.push(Number(blockId));
     console.log(gameStatus.sequence);
   
     if (
@@ -43,26 +43,26 @@ function App() {
     for (let block=0; block < blocks; block++) {
       el.push(
         <div
+          id={`block-ref-${block}`}
           key={block}
           onClick={(e: MouseEvent) => {
           e.preventDefault();
           clickBlock(e, block);
         }} className="block">
-          <div className='block-cover'></div>
+          <div className='block-cover'>{block}</div>
         </div>
       )
     }
     return el;
   }
 
-  const blockElements: HTMLCollectionOf<Element> | null = document.getElementsByClassName("block");
+  let agente: any;
 
   useEffect(() => {
       // your post layout code (or 'effect') here.
       function setBlockBackGroundColor(blockId: number, color: string) {
-        if (blockElements)
-          // @ts-ignore: Unreachable code error
-          blockElements.item(blockId).style.backgroundColor = color;
+        const el = document.getElementById(`block-ref-${blockId}`);
+        if (el) el.style.backgroundColor = color;
       }
           
       function activeBlock(blockId: number | undefined) {
@@ -76,17 +76,17 @@ function App() {
       let oldItem: number | undefined = undefined;
       const sequence = [ ...gameStatus.theSequence ];
       
-      const agente = setInterval(() => {
+      agente = setInterval(() => {
       
         if (sequence.length) {
-          if (!oldItem) {
-            oldItem = sequence.pop();
+          if (oldItem === undefined) {
+            oldItem = sequence.shift();
           } else {
             deactiveBlock(oldItem);
-            oldItem = sequence.pop();
+            oldItem = sequence.shift();
           }
           activeBlock(oldItem);
-        } else if (oldItem) {
+        } else if (oldItem != undefined) {
           deactiveBlock(oldItem);
         }
         
@@ -96,6 +96,13 @@ function App() {
     // an empty array if you just want to run it once after component mounted. 
     []
   );
+
+  useEffect(() => {
+    return () => {
+      // Anything in here is fired on component unmount.
+      if (agente) clearInterval(agente);
+    }
+  }, [])
 
   return (
     <div id="main">
