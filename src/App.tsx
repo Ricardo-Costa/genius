@@ -2,6 +2,7 @@ import React, { MouseEvent, ReactElement, useEffect, useState } from 'react';
 import { DEFAULT_BLOCKS_BY_LEVEL, DEFAULT_DECREASER_INTERVAL_PERCENT, DEFAULT_INCREASE_SCORE, DEFAULT_INTERVAL, DEFAULT_START_SCORE } from './app/configs';
 import { activeBlock, deactiveBlock } from './app/utils/blocks.utils';
 import './assets/styles.scss';
+import ifImg from './assets/if.png';
 import 'animate.css';
 
 export type GameStatus = {
@@ -30,8 +31,7 @@ const App = () => {
       gameStatus.theSequence.every((value, index) => value === gameStatus.sequence[index])
     ) {
       setScores( scores + DEFAULT_INCREASE_SCORE + ( DEFAULT_INTERVAL - parseInt(String(timer))));
-      alert("Parabéns!!");
-      // document.location.reload();
+      console.log("Congrats!!");
 
       // restart game, with less timer
       setTimer(timer * DEFAULT_DECREASER_INTERVAL_PERCENT);
@@ -39,7 +39,7 @@ const App = () => {
       restartGame();
 
     } else if (gameStatus.theSequence.length === gameStatus.sequence.length) {
-      alert("Deu Ruim :[");
+      alert("Oh nooo!! :[");
       document.location.reload();
     }
   };
@@ -85,7 +85,11 @@ const App = () => {
 
   const restartGame = () => {
     if (agente) clearInterval(agente);
+    // clear options
     gameStatus.sequence = [];
+    // shuffle items
+    gameStatus.theSequence = gameStatus.theSequence.sort(() => .5 - Math.random());
+    // start again
     startGame();
   }
 
@@ -109,9 +113,14 @@ const App = () => {
     <div id="main">
     <div id="header">{renderBlocks()}</div>
     <div id="footer">
-      <div className='animate__animated animate__headShake'>Nickname: Player 1</div>
-      <div className='animate__animated animate__pulse animate__infinite	infinite'>
-        Scores: <span className='score-value'>{scores}</span>
+      <div className='part-left'>
+        <img src={ifImg} draggable="false" />
+      </div>
+      <div className='part-right'>
+        <div className='animate__animated animate__headShake'>Nickname: Player T-Rex</div>
+        <div className='animate__animated animate__pulse animate__infinite	infinite'>
+          Scores: <span className='score-value'>{scores}</span>
+        </div>
       </div>
     </div>
     </div>

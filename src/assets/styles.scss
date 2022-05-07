@@ -49,17 +49,32 @@ div.block:active {
 
 div#footer {
   display: flex;
-  justify-content: center;
-  flex-direction: column;
   box-sizing: border-box;
-  font-family: 'Play', sans-serif;
-  font-size: 2em;
   font-weight: bold;
   height: 20vh;
   width: 100vw;
-  text-align: center;
 
-  span.score-value {
-    color: rgb(90, 245, 90);
+  div.part-left {
+    margin-right: 20px;
+
+    img {
+      height: 100%;
+      border-radius: 40px;
+    }
+  }
+
+  div.part-right {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    box-sizing: border-box;
+    font-family: 'Play', sans-serif;
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+  
+    span.score-value {
+      color: rgb(90, 245, 90);
+    }
   }
 }
