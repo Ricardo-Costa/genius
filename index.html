@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Any Game</title>
+    <script type="module" src="src/index.js"></script>
+    <script src="src/actions/events.js"></script>
+    <link rel="stylesheet" href="src/styles/main.css">
+    <script>
+      window.theSequence = [ 3, 6, 1, 10 ];
+      window.sequence = [];
+    </script>
+</head>
+<body>
+    <div id="main">
+      <div id="header">
+        <div onclick="clickBlock(event, 0)" class="block">0</div>
+        <div onclick="clickBlock(event, 1)" class="block">1</div>
+        <div onclick="clickBlock(event, 2)" class="block">2</div>
+        <div onclick="clickBlock(event, 3)" class="block">3</div>
+        <div onclick="clickBlock(event, 4)" class="block">4</div>
+        <div onclick="clickBlock(event, 5)" class="block">5</div>
+        <div onclick="clickBlock(event, 6)" class="block">6</div>
+        <div onclick="clickBlock(event, 7)" class="block">7</div>
+        <div onclick="clickBlock(event, 8)" class="block">8</div>
+        <div onclick="clickBlock(event, 9)" class="block">9</div>
+        <div onclick="clickBlock(event, 10)" class="block">10</div>
+      </div>
+      <div id="footer"></div>
+    </div>
+    <script src="src/ia/start.js"></script>
+</body>
+</html>

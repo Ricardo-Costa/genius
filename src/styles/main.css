@@ -1,0 +1,26 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: rgb(61, 61, 61);
+}
+div#main {
+  background-color: rgba(109, 202, 171, 0.5);
+}
+div#header {
+  display: flex;
+  height: 80vh;
+  justify-content: space-around;
+  background-color: rgba(165, 42, 42, 0.425);
+}
+div.block {
+  cursor: pointer;
+  display: flex;
+  flex-grow: 1;
+  border: 2px solid yellowgreen;
+  background-color: rgba(255, 255, 0, 0.39);
+}
+div.block:hover,
+div.block:active {
+  background-color: rgba(155, 155, 37, 0.39);
+}
