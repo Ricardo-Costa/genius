@@ -4,28 +4,19 @@ import { activeBlock, deactiveBlock } from './app/utils/blocks.utils';
 import './assets/styles.scss';
 import ifImg from './assets/if.png';
 import 'animate.css';
-
-export type GameStatus = {
-  theSequence: number[]
-  sequence: number[]
-  level: number
-};
+import { GameStatus } from './app/types/game-status.type';
+import { genereteInitialStatus } from './app/utils/game-status.utils';
+import { Block } from './app/components/Block';
 
 const App = () => {
-  // STATES
-  const [ gameStatus ] = useState<GameStatus>({
-    theSequence: [ 3, 0, 1, 2 ],
-    sequence: [],
-    level: 1,
-  });
+  const [ gameStatus ] = useState<GameStatus>(genereteInitialStatus());
   const [ blocks ] = useState<number>(gameStatus.level * DEFAULT_BLOCKS_BY_LEVEL);
   const [ timer, setTimer ] = useState<number>(DEFAULT_INTERVAL);
   const [ scores, setScores ] = useState<number>(DEFAULT_START_SCORE);
 
-  // HANDLE CLICK
-  const clickBlock = (event: MouseEvent, blockId: number) => {
+  const clickBlock = (blockId: number) => {
     gameStatus.sequence.push(Number(blockId));
-  
+
     if (
       gameStatus.theSequence.length === gameStatus.sequence.length &&
       gameStatus.theSequence.every((value, index) => value === gameStatus.sequence[index])
@@ -37,26 +28,16 @@ const App = () => {
       setTimer(timer * DEFAULT_DECREASER_INTERVAL_PERCENT);
       // restart game
       restartGame();
-
     } else if (gameStatus.theSequence.length === gameStatus.sequence.length) {
       alert("Oh nooo!! :[");
       document.location.reload();
     }
   };
 
-  // MAIN RENDER BLOCKS
   const renderBlocks = () => {
     const el: ReactElement[] | null = [];
     for (let block=0; block < blocks; block++) {
-      el.push(
-        <div
-          id={`block-ref-${block}`}
-          key={block}
-          onClick={(e: MouseEvent) => {
-          e.preventDefault();
-          clickBlock(e, block);
-        }} className="block"></div>
-      )
+      el.push(<Block key={block} block={block} clickBlock={clickBlock}/>)
     }
     return el;
   }
