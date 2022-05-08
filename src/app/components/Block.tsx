@@ -1,4 +1,4 @@
-import { MouseEvent } from "react";
+import React, { MouseEvent } from "react";
 import { BlockProps } from "../types/block-props.type";
 
 export const Block = ({ block, clickBlock }: BlockProps) => {

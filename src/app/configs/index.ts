@@ -2,6 +2,8 @@ export const DEFAULT_START_SCORE = 0;
 export const DEFAULT_INCREASE_SCORE = 100;
 export const DEFAULT_BLOCKS_BY_LEVEL = 4;
 
+export const DEFAULT_TIMER_CONGRATS = 800;
+
 export const DEFAULT_INTERVAL = 1000;
 export const DEFAULT_DECREASER_INTERVAL_PERCENT = 0.8; // -20%
 

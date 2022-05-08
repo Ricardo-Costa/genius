@@ -1,17 +1,26 @@
-import React, { MouseEvent, ReactElement, useEffect, useState } from 'react';
-import { DEFAULT_BLOCKS_BY_LEVEL, DEFAULT_DECREASER_INTERVAL_PERCENT, DEFAULT_INCREASE_SCORE, DEFAULT_INTERVAL, DEFAULT_START_SCORE } from './app/configs';
+import React, { ReactElement, useEffect, useState } from 'react';
+import {
+  DEFAULT_BLOCKS_BY_LEVEL,
+  DEFAULT_DECREASER_INTERVAL_PERCENT,
+  DEFAULT_INCREASE_SCORE,
+  DEFAULT_INTERVAL,
+  DEFAULT_START_SCORE,
+  DEFAULT_TIMER_CONGRATS
+} from './app/configs';
 import { activeBlock, deactiveBlock } from './app/utils/blocks.utils';
-import './assets/styles.scss';
-import ifImg from './assets/if.png';
-import 'animate.css';
 import { GameStatus } from './app/types/game-status.type';
 import { genereteInitialStatus } from './app/utils/game-status.utils';
 import { Block } from './app/components/Block';
+import { Footer } from './app/components/Footer';
+import { Congrats } from './app/components/Congrats';
+import './assets/styles.scss';
+import 'animate.css';
 
 const App = () => {
   const [ gameStatus ] = useState<GameStatus>(genereteInitialStatus());
   const [ blocks ] = useState<number>(gameStatus.level * DEFAULT_BLOCKS_BY_LEVEL);
   const [ timer, setTimer ] = useState<number>(DEFAULT_INTERVAL);
+  const [ showCongrats, setShowCongrats ] = useState<boolean>(false);
   const [ scores, setScores ] = useState<number>(DEFAULT_START_SCORE);
 
   const clickBlock = (blockId: number) => {
@@ -22,8 +31,9 @@ const App = () => {
       gameStatus.theSequence.every((value, index) => value === gameStatus.sequence[index])
     ) {
       setScores( scores + DEFAULT_INCREASE_SCORE + ( DEFAULT_INTERVAL - parseInt(String(timer))));
-      console.log("Congrats!!");
-
+      // show congrats
+      setShowCongrats(true);
+      setTimeout(() => setShowCongrats(false), DEFAULT_TIMER_CONGRATS);
       // restart game, with less timer
       setTimer(timer * DEFAULT_DECREASER_INTERVAL_PERCENT);
       // restart game
@@ -91,19 +101,12 @@ const App = () => {
   // }, [])
 
   return (
-    <div id="main">
-    <div id="header">{renderBlocks()}</div>
-    <div id="footer">
-      <div className='part-left'>
-        <img src={ifImg} draggable="false" />
+    <div>
+      <Congrats show={showCongrats} />
+      <div id="main">
+        <div id="header">{renderBlocks()}</div>
+        <Footer scores={scores} />
       </div>
-      <div className='part-right'>
-        <div className='animate__animated animate__headShake'>Nickname: Player T-Rex</div>
-        <div className='animate__animated animate__pulse animate__infinite	infinite'>
-          Scores: <span className='score-value'>{scores}</span>
-        </div>
-      </div>
-    </div>
     </div>
   );
 }
