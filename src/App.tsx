@@ -104,6 +104,7 @@ const App = () => {
     <div>
       <Congrats show={showCongrats} />
       <div id="main">
+        <div id="title"><span>GENIUS</span></div>
         <div id="header">{renderBlocks()}</div>
         <Footer scores={scores} />
       </div>

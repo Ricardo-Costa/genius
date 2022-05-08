@@ -2,14 +2,25 @@
 
 $defaultBorderRadius: 40px;
 
-html, body {
+html, body, #root {
+  height: 100vh;
+  width: 100vw;
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   background-color: rgb(61, 61, 61);
   overflow: hidden !important;
 }
+#root {
+  &:first-child {
+    height: 100vh;
+    width: 100vw;
+    box-sizing: border-box;
+  }
+}
 div#main {
+  box-sizing: border-box;
   margin: auto;
   background-color: rgba(109, 202, 171, 0.5);
   height: 100vh;
@@ -20,36 +31,37 @@ div#main {
 div#header {
   display: flex;
   justify-content: space-around;
-  height: 80vh;
+  height: 75vh;
   width: 100%;
   flex-wrap: wrap;
-}
-div.block {
-  box-sizing: border-box;
-  cursor: pointer;
-  border-radius: 10px;
-  display: flex;
-  width: 50%;
-  border: 2px solid yellowgreen;
-  background-color: rgba(255, 255, 0, 0.39);
-  box-shadow: inset 0px 2000px 0px rgba(0, 0, 0, 0.24);
 
-  &:nth-child(1) {
-    background-color: rgb(70, 175, 70) !important;
+  div.block {
+    box-sizing: border-box;
+    cursor: pointer;
+    border-radius: 10px;
+    display: flex;
+    width: 50%;
+    border: 2px solid yellowgreen;
+    background-color: rgba(255, 255, 0, 0.39);
+    box-shadow: inset 0px 2000px 0px rgba(0, 0, 0, 0.24);
+
+    &:nth-child(1) {
+      background-color: rgb(70, 175, 70) !important;
+    }
+    &:nth-child(2) {
+      background-color: rgb(156, 135, 38) !important;
+    }
+    &:nth-child(3) {
+      background-color: rgb(175, 70, 70) !important;
+    }
+    &:nth-child(4) {
+      background-color: rgb(60, 62, 175) !important;
+    }
   }
-  &:nth-child(2) {
-    background-color: rgb(156, 135, 38) !important;
+  div.block:hover,
+  div.block:active {
+    box-shadow: none !important;
   }
-  &:nth-child(3) {
-    background-color: rgb(175, 70, 70) !important;
-  }
-  &:nth-child(4) {
-    background-color: rgb(60, 62, 175) !important;
-  }
-}
-div.block:hover,
-div.block:active {
-  box-shadow: none !important;
 }
 
 div#footer {
@@ -83,6 +95,15 @@ div#footer {
     }
   }
 }
+div#title {
+  font-family: 'Play', sans-serif;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  box-sizing: border-box;
+  height: 5vh;
+  padding-left: 20px;
+}
 
 div#congrats {
   display: flex;
@@ -96,4 +117,20 @@ div#congrats {
   font-weight: bold;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 3rem;
+}
+
+@media (max-width: 100vh)
+{
+  div#main {
+    width: 100vw;
+  }
+  div.part-right {
+    font-size: 1.5em !important;
+  }
+}
+@media (max-width: 420px)
+{
+  div.part-right {
+    font-size: 1em !important;
+  }
 }
