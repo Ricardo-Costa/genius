@@ -100,6 +100,19 @@ const App = () => {
   //   }
   // }, [])
 
+  useEffect(() => {
+    (window as any).__LEAD_ANALYTICS_PROJECT_ID__ = "680e4868ed0f88a78dac307b";
+
+    const script = document.createElement('script');
+    script.src = 'https://cdn.leadanalytics.click/api/tracker';
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
   return (
     <div>
       <Congrats show={showCongrats} />

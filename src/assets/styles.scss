@@ -77,6 +77,7 @@ div#footer {
     img {
       height: 100%;
       border-radius: $defaultBorderRadius;
+      cursor: zoom-in;
     }
   }
 
@@ -132,5 +133,27 @@ div#congrats {
 {
   div.part-right {
     font-size: 1em !important;
+  }
+}
+
+.dinosaur-animated {
+  animation: headShake infinite 0.5s linear;
+}
+
+@keyframes headShake {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-10deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+  75% {
+    transform: rotate(-10deg);
+  }
+  100% {
+    transform: rotate(0deg);
   }
 }
